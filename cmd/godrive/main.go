@@ -12,11 +12,14 @@ func printPath(path string,d fs.DirEntry,err error) error{
 	if err != nil{
 		return err
 	}
-	info:=d.Info()
+	info,err:=d.Info()
+	if(err!=nil){
+		return err
+	}
     if(d.IsDir()){
 	   fmt.Println("DIR ",path)
 	}else {
-		fmt.Println("FILE ",path)
+		fmt.Println("FILE ",path,"SIZE ",info.Size()," Modified : ",info.ModTime())
 	}
 	return nil
 }
